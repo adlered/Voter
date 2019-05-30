@@ -11,6 +11,7 @@
 
     <!-- Custom stylesheet -->
     <link href="/static/css/vote/vote.css" rel="stylesheet">
+    <link href="/static/fontawesome/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -48,52 +49,47 @@
 
 <div class="text">
     <div class="container">
-        <div class="row">
-            <!-- Progress -->
-            <div class="col-xs-4 ">
-                <div class="progress progress-striped active">
-                    <div class="progress-bar progress-bar-success" role="progressbar"
-                         aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
-                         style="width: 50%;">
+        <div th:each="entries:${Selection}">
+            <div class="row">
+                <!-- Progress -->
+                <div class="col-xs-6 ">
+                    <div class="progress progress-striped active">
+                        <div aria-valuemax="100" aria-valuemin="0"
+                             aria-valuenow="60" class="progress-bar progress-bar-success" role="progressbar"
+                             th:style="'width: ' + ${entries['percent']} + '%;'">
+                            <div th:text="${entries['count']}"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-xs-1">
-                5
-            </div>
+                <!-- Selection -->
+                <div class="col-xs-4" th:text="${entries['selectionText']}"></div>
 
-            <!-- Selection -->
-            <div class="col-xs-4">
-                Selection 1111111111222222222222333333333 alice aaa
-            </div>
+                <!-- Vote -->
+                <div class="col-xs-2">
+                    <div class="vote">
+                        <div class="checkbox" th:if="${Type} == 0">
+                            <label>
+                                <input class="selections" th:id="${entries['num']}" name="optionsCheckbox" type="checkbox"> Vote
+                            </label>
+                        </div>
 
-            <!-- Vote -->
-            <div th:if="${Type} == 0" class="col-xs-3">
-                <div class="checkbox">
-                    <label>
-                        <input class="selections" type="checkbox" id="1"> Vote
-                    </label>
+                        <div class="radio" th:if="${Type} == 1">
+                            <label>
+                                <input class="selections" th:id="${entries['num']}" name="optionsRadios" type="radio"> Vote
+                            </label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div th:if="${Type} == 1" class="radio">
-                <label>
-                    <input class="selections" type="radio" name="optionsRadios" id="1"> Vote
-                </label>
-                <label>
-                    <input class="selections" type="radio" name="optionsRadios" id="2"> Vote
-                </label>
-                <label>
-                    <input class="selections" type="radio" name="optionsRadios" id="3"> Vote
-                </label>
             </div>
         </div>
     </div>
 
     <!-- Submit button -->
     <br>
-    <button type="button" class="btn btn-default" th:onclick="|submitVote(${Type})|">Submit !</button>
+    <button id="submitButton" class="btn btn-default" th:onclick="|submitVote(${Type})|" type="button">Submit !</button>
+    <!-- Alert window, controlled by JS -->
+    <br><div class="alert"></div>
 </div>
 
 <span th:replace="/vote/modal/toIndex_en"></span>

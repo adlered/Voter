@@ -6,6 +6,16 @@ public class Vote {
     private String Describe;
     private String Selection;
 
+    public Integer getType() {
+        return Type;
+    }
+
+    public void setType(Integer type) {
+        Type = type;
+    }
+
+    private Integer Type;
+
     public Integer getVID() {
         return VID;
     }

@@ -22,6 +22,7 @@ public class VoteController {
         modelAndView.addObject("Title", vote.getTitle());
         modelAndView.addObject("Describe", vote.getDescribe());
         modelAndView.addObject("Selection", vote.getSelection());
+        modelAndView.addObject("Type", vote.getType());
         return modelAndView;
     }
 }

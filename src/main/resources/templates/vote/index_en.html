@@ -30,8 +30,8 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="javascript: void(0);" th:text="'For VoteID ' + ${VoteID}"></a></li>
-                <li><a href="#about">To VoteID ..</a></li>
-                <li><a href="#contact">About</a></li>
+                <li><a href="javascript: void(0);" data-target="#toVoteID" data-toggle="modal">To VoteID ..</a></li>
+                <li><a href="javascript: void(0);">About</a></li>
             </ul>
         </div>
     </div>
@@ -41,9 +41,11 @@
     <div class="title">
         <h2 th:text="${Title}"></h2>
         <h4 th:text="${Describe}"></h4>
-        <br>
-        <span class="text-info" style="font-size: 16px;" th:if="${Type} == 0">Make a <b>multiple selection</b> : )</span>
-        <span class="text-info" style="font-size: 16px;" th:if="${Type} == 1">Make a <b>mingle election</b> : )</span>
+        <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">Make a <b>multiple selection</b> : )</p>
+        <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 1">Make a <b>mingle election</b> : )</p>
+        <p th:if="${Limit} != -1">
+            <i class="fa fa-info"></i>&nbsp;<span th:text="'Select limit: ' + ${Limit}"></span>
+        </p>
     </div>
 </div>
 
@@ -92,13 +94,15 @@
 </div>
 
 <span th:replace="/vote/modal/toIndex_en"></span>
+<span th:replace="/vote/modal/toVoteID_en"></span>
 
 <script src="/static/jquery/jquery-3.4.1.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/iCheck/1.0.2/icheck.min.js"></script>
+<script src="/static/bootstrap/js/icheck.min.js"></script>
 
 <!-- Custom JS -->
 <script src="/static/js/vote/submit.js"></script>
+<script src="/static/js/vote/toVoteID.js"></script>
 <script>
     eventOnSelect([[${Limit}]]);
 </script>

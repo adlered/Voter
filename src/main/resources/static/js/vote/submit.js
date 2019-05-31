@@ -4,7 +4,7 @@ function eventOnSelect(limit) {
         var len = $("input[name=optionsCheckbox]:checked").length;
         if (limit != -1) {
             if (len > limit) {
-                alert("Out of select limit (" + limit + ")");
+                alert(": ( Out of select limit (" + limit + ")");
                 select.iCheck('uncheck');
             }
         }
@@ -64,5 +64,10 @@ function emptySet() {
 
 function connectionRefused() {
     $(".alert").html("<br><div class=\"alert alert-danger\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Sorry, try again！</strong>Connection refused.</div>")
+    $("#submitButton").html("<i class=\"fa fa-rotate-right\"></i> Retry");
+}
+
+function invalidRule() {
+    $(".alert").html("<br><div class=\"alert alert-danger\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Sorry, try again！</strong>Invalid vote rule. (R U Hacking?)</div>")
     $("#submitButton").html("<i class=\"fa fa-rotate-right\"></i> Retry");
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import pers.adlered.voter.analyzer.Selection;
 import pers.adlered.voter.dao.Select;
@@ -32,5 +33,16 @@ public class VoteController {
         List<Map<String, String>> selects = Selection.analyze(vote.getSelection());
         modelAndView.addObject("Selection", selects);
         return modelAndView;
+    }
+
+    @RequestMapping("/checkVoteID/{VID}")
+    @ResponseBody
+    public Integer checkVoteID(@PathVariable Integer VID) {
+        try {
+            voteMapper.checkVote(VID).getVID();
+            return 1;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 }

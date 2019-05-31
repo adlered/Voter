@@ -9,4 +9,7 @@ import pers.adlered.voter.dao.Vote;
 public interface VoteMapper {
     @Select("SELECT * FROM Voter_Vote where VID = #{VID}")
     Vote getVote(@Param("VID") Integer VID);
+
+    @Select("SELECT VID FROM Voter_Vote where VID = #{VID}")
+    Vote checkVote(@Param("VID") Integer VID);
 }

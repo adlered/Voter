@@ -5,6 +5,8 @@
 
 [English Version](#english-version)
 
+![DEMO](/images/Demo.gif)
+
 # 中文说明
 
 ## 运行

@@ -35,14 +35,11 @@ public class VoteController {
     public ModelAndView showVote(@PathVariable Integer VID) {
         Vote vote = voteMapper.getVote(VID);
         ModelAndView modelAndView = new ModelAndView("/vote/index_en");
-        try {
-            modelAndView.addObject("VoteID", vote.getVID());
-            modelAndView.addObject("Title", vote.getTitle());
-            modelAndView.addObject("Describe", vote.getDescribe());
-            modelAndView.addObject("Type", vote.getType());
-            modelAndView.addObject("Limit", vote.getLimit());
-        } catch (NullPointerException NPE) {
-        }
+        modelAndView.addObject("VoteID", vote.getVID());
+        modelAndView.addObject("Title", vote.getTitle());
+        modelAndView.addObject("Describe", vote.getDescribe());
+        modelAndView.addObject("Type", vote.getType());
+        modelAndView.addObject("Limit", vote.getLimit());
         //Selection process
         List<Map<String, String>> selects = Selection.analyze(vote.getSelection());
         modelAndView.addObject("Selection", selects);
@@ -63,6 +60,7 @@ public class VoteController {
     @RequestMapping("/voterSubmit")
     @ResponseBody
     public String voterSubmit(String title, String describe, String selection, String type, String limit) {
+        //TODO Submit time limit
         return "";
     }
 
@@ -128,14 +126,5 @@ public class VoteController {
             e.printStackTrace();
         }
         return "0";
-    }
-
-    @RequestMapping("/serialize")
-    @ResponseBody
-    public String serialize(Integer VID) {
-        Vote vote = voteMapper.getVote(VID);
-        List<Map<String, String>> selects = Selection.analyze(vote.getSelection());
-        System.out.println(Serialize.makeSerial(selects));
-        return Serialize.makeSerial(selects);
     }
 }

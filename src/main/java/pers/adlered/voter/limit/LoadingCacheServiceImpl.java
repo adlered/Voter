@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class LoadingCacheServiceImpl {
     LoadingCache<String, RateLimiter> ipRequestCaches = CacheBuilder.newBuilder()
-            .maximumSize(200)// 设置缓存个数
+            .maximumSize(1000)
             .expireAfterWrite(1, TimeUnit.DAYS)
             .build(new CacheLoader<String, RateLimiter>() {
                 @Override

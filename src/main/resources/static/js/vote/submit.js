@@ -74,29 +74,31 @@ function invalidRule() {
 }
 
 function vote(VID, selected) {
-    var params = {};
-    params.VID = VID;
-    params.selected = selected;
-    $.ajax({
-        url: "/submitVote",
-        data: params,
-        success: function (data) {
-            if (data == 1) {
-                var list = selected.split(",");
-                list.forEach(function (value, index, array) {
-                    var count = $("#progress" + value + " .count").text();
-                    var afterCount = Number(count) + 1;
-                    $("#progress" + value + " .count").text(afterCount);
-                    var width = $("#progress" + value).width();
-                    var afterWidth = Number(width) + 25;
-                    $("#progress" + value).width(afterWidth);
-                    $("#progress" + value).removeClass("progress-bar-success");
-                    $("#progress" + value).addClass("progress-bar-info");
-                });
-                successful();
-            } else if (data == 0) {
-                only1Time();
+    setTimeout(function () {
+        var params = {};
+        params.VID = VID;
+        params.selected = selected;
+        $.ajax({
+            url: "/submitVote",
+            data: params,
+            success: function (data) {
+                if (data == 1) {
+                    var list = selected.split(",");
+                    list.forEach(function (value) {
+                        var count = $("#progress" + value + " .count").text();
+                        var afterCount = Number(count) + 1;
+                        $("#progress" + value + " .count").text(afterCount);
+                        var width = $("#progress" + value).width();
+                        var afterWidth = Number(width) + 25;
+                        $("#progress" + value).width(afterWidth);
+                        $("#progress" + value).removeClass("progress-bar-success");
+                        $("#progress" + value).addClass("progress-bar-info");
+                    });
+                    successful();
+                } else if (data == 0) {
+                    only1Time();
+                }
             }
-        }
-    })
+        });
+    }, 1000);
 }

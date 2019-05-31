@@ -70,8 +70,9 @@ public class VoteController {
     @ResponseBody
     public String submitVote(HttpServletRequest request, Integer VID, String selected) {
         String ipAddr = IpUtil.getIpAddr(request);
+        String ipAndVID = ipAddr + ":" + VID;
         try {
-            RateLimiter limiter = loadingCacheService.getRateLimiter(ipAddr);
+            RateLimiter limiter = loadingCacheService.getRateLimiter(ipAndVID);
             boolean localAccess = false;
             //Localhost is in the WhiteList
             if (ipAddr.equals("0:0:0:0:0:0:0:1")) {

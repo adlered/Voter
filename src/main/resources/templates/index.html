@@ -5,6 +5,40 @@
     <title>Voter</title>
 </head>
 <body>
-Please specific VoteID into address bar ( /vote/{VoteID} ) or <a href="/admin">go to ADMIN page</a>
+<h2>Voter - Anonymous Vote System | 匿名投票系统</h2>
+VoteID: <input type="text" id="VoteID"/>
+<button onclick="toVoteID()">GO</button>
+<br><br>
+Please specific VoteID into address bar ( /vote/{VoteID} ) or <a href="/public"><b>PUBLIC A VOTE</b></a>
+<br>
+请在地址栏中指定投票号 ( /vote/{VoteID} ) 或 <a href="/public"><b>发起一个投票</b></a>
+<br><br>
+<b>Voter</b> is an anonymous vote website, and the voters were also anonymous. To ensure security, you can issue votes, but you can't modify or delete any votes.
+<br>
+<b>Voter</b> 是一个匿名投票站点，投票发起者同样是匿名的。所以为了确保安全，你可以发起投票，但不能修改或删除任何投票。
+<script src="/static/jquery/jquery-3.4.1.min.js"></script>
+<script>
+    $("#VoteID").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+            toVoteID();
+        }
+    });
+
+    function toVoteID() {
+        var voteID = $("#VoteID").val();
+        $.ajax({
+            url: "/checkVoteID/" + voteID,
+            success: function (data) {
+                if (data == 1) {
+                    //Exist
+                    location.href = "/vote/" + voteID;
+                } else if (data == 0) {
+                    //Not exist
+                    alert("VoteID not found! Please try again.")
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>

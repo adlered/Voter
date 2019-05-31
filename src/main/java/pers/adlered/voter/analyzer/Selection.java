@@ -1,8 +1,5 @@
 package pers.adlered.voter.analyzer;
 
-import pers.adlered.voter.dao.Select;
-import sun.dc.pr.PRError;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;

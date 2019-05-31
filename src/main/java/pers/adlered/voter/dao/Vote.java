@@ -5,16 +5,8 @@ public class Vote {
     private String Title;
     private String Describe;
     private String Selection;
-
-    public Integer getType() {
-        return Type;
-    }
-
-    public void setType(Integer type) {
-        Type = type;
-    }
-
     private Integer Type;
+    private Integer Limit;
 
     public Integer getVID() {
         return VID;
@@ -46,5 +38,21 @@ public class Vote {
 
     public void setSelection(String selection) {
         Selection = selection;
+    }
+
+    public Integer getType() {
+        return Type;
+    }
+
+    public void setType(Integer type) {
+        Type = type;
+    }
+
+    public Integer getLimit() {
+        return Limit;
+    }
+
+    public void setLimit(Integer limit) {
+        Limit = limit;
     }
 }

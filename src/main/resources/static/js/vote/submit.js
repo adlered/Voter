@@ -1,3 +1,16 @@
+function eventOnSelect(limit) {
+    $(".selections").on("click", function(){
+        var select = $(this);
+        var len = $("input[name=optionsCheckbox]:checked").length;
+        if (limit != -1) {
+            if (len > limit) {
+                alert("Out of select limit (" + limit + ")");
+                select.iCheck('uncheck');
+            }
+        }
+    });
+}
+
 function submitVote(choice) {
     if (choice == 1) {
         wait();
@@ -37,6 +50,11 @@ function successful() {
     $("#submitButton").removeClass("btn-default");
     $("#submitButton").addClass("btn-success");
     $("#submitButton").removeAttr("onclick");
+    $(document.querySelectorAll("#divVote")).remove();
+    $(document.querySelectorAll("#divProgress")).removeClass("col-xs-5");
+    $(document.querySelectorAll("#divProgress")).addClass("col-xs-6");
+    $(document.querySelectorAll("#divSelection")).removeClass("col-xs-5");
+    $(document.querySelectorAll("#divSelection")).addClass("col-xs-6");
 }
 
 function emptySet() {

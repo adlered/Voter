@@ -27,6 +27,7 @@ public class VoteController {
         modelAndView.addObject("Title", vote.getTitle());
         modelAndView.addObject("Describe", vote.getDescribe());
         modelAndView.addObject("Type", vote.getType());
+        modelAndView.addObject("Limit", vote.getLimit());
         //Selection process
         List<Map<String, String>> selects = Selection.analyze(vote.getSelection());
         modelAndView.addObject("Selection", selects);

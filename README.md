@@ -70,7 +70,7 @@ INSERT INTO `Voter_Vote` VALUES (1, 'This is a vote title :)', 'And here is a de
 
 通过`pers.adlered.voter.analyzer`中的方法对此字段实现分析与修改。
 
-#English Version
+# English Version
 
 ## Run
 

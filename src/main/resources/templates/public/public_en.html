@@ -150,7 +150,9 @@
                 url: "/voterSubmit",
                 data: params,
                 success: function (data) {
-                    alert(data);
+                    setTimeout(function () {
+                        location.href = "/vote/" + data;
+                    }, 1000);
                 }
             });
             console.log(build);

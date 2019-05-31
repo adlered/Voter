@@ -72,7 +72,12 @@ public class VoteController {
         String ipAddr = IpUtil.getIpAddr(request);
         try {
             RateLimiter limiter = loadingCacheService.getRateLimiter(ipAddr);
-            if(limiter.tryAcquire()){
+            boolean localAccess = false;
+            //Localhost is in the WhiteList
+            if (ipAddr.equals("0:0:0:0:0:0:0:1")) {
+                localAccess = true;
+            }
+            if(limiter.tryAcquire() || localAccess){
                 //PASS
                 //Get VID info
                 Vote vote = voteMapper.getVote(VID);

@@ -56,10 +56,10 @@
                 <!-- Progress -->
                 <div class="col-xs-5" id="divProgress">
                     <div class="progress progress-striped active">
-                        <div aria-valuemax="100" aria-valuemin="0"
+                        <div th:id="'progress' + ${entries['num']}" aria-valuemax="100" aria-valuemin="0"
                              aria-valuenow="60" class="progress-bar progress-bar-success" role="progressbar"
                              th:style="'width: ' + ${entries['percent']} + '%;'">
-                            <div th:text="${entries['count']}"></div>
+                            <div class="count" th:text="${entries['count']}"></div>
                         </div>
                     </div>
                 </div>

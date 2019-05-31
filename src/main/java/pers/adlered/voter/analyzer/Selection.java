@@ -28,6 +28,10 @@ public class Selection {
         //Write
         for (Map<String, String> map : selectionList) {
             DecimalFormat decimalFormat = new DecimalFormat("0.00");
+            //To avoid 0/0=NaN
+            if (countVotes == 0) {
+                countVotes = 100;
+            }
             float percent = Integer.parseInt(map.get("count")) / countVotes;
             percent = Float.parseFloat(decimalFormat.format(percent));
             //Too low or too high will wrong when browser display.

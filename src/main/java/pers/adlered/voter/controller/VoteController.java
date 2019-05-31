@@ -59,9 +59,15 @@ public class VoteController {
 
     @RequestMapping("/voterSubmit")
     @ResponseBody
-    public String voterSubmit(String title, String describe, String selection, String type, String limit) {
-        //TODO Submit time limit
-        return "";
+    public Integer voterSubmit(String title, String describe, String selection, Integer type, Integer limit) {
+        try {
+            voteMapper.insertVote(title, describe, selection, type, limit);
+            Integer VID = voteMapper.queryVoteID(title, describe, selection, type, limit);
+            return VID;
+        } catch (Exception E) {
+            E.printStackTrace();
+            return -1;
+        }
     }
 
     @RequestMapping("/submitVote")

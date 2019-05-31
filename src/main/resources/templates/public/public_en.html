@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <title>Launch a vote - Voter</title>
+
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom stylesheet -->
+    <link href="/static/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/pub/sticky_footer.css" rel="stylesheet">
+    <link href="/static/progress/css/component.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Custom script -->
+    <script src="/static/progress/js/modernizr.custom.js"></script>
+</head>
+
+<body>
+<div class="container" role="main">
+    <h1 class="mt-5">Launch a vote</h1>
+    <p class="lead">Fill in following options to launch a vote, without login.</p>
+    <p class="text-info"><b>If you submit following options, you <font color="red">CANNOT EDIT/DELETE ANYWAY</font>.</b>
+    </p>
+    <!-- Options -->
+    <!-- TITLE -->
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-quote-left"></i></span>
+        <input aria-describedby="basic-addon1" class="form-control" id="voteTitle" placeholder="Vote title" type="text">
+    </div>
+    <br>
+    <!-- DESCRIBE -->
+    <div class="input-group">
+        <textarea class="form-control" id="voteDescribe" name=textarea placeholder="Vote describe" rows="3"></textarea>
+        <span class="input-group-addon"><i class="fa fa-quote-right"></i></span>
+    </div>
+    <br>
+    <!-- MODE AND MAXIMUM -->
+    <div class="input-group">
+        <div class="input-group-btn">
+            <button aria-expanded="false" aria-haspopup="true" class="btn btn-default dropdown-toggle"
+                    data-toggle="dropdown" id="mode"
+                    type="button">Selection mode <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript: void(0);" onclick="singleElection()">Single election</a></li>
+                <li><a href="javascript: void(0);" onclick="multipleSelection()">Multiple selection</a></li>
+            </ul>
+        </div>
+        <input class="form-control" id="modeInput" placeholder="Maximum Selection of Items" type="text">
+    </div>
+    <!-- LINE -->
+    <p class="page-header"></p>
+    <!-- OPTIONS -->
+    <div class="input-group">
+        <span class="input-group-addon">Option 1</span>
+        <input class="form-control" id="option1" type="text">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon">Option 2</span>
+        <input class="form-control" id="option2" type="text">
+    </div>
+    <br>
+    <div class="option3">
+        <div class="input-group">
+            <span class="input-group-addon">Option 3</span>
+            <input class="form-control" id="option3" type="text">
+            <div class="cls"></div>
+            <span class="input-group-btn" id="close3">
+                <button class="btn btn-default" onclick="delOption()" type="button">
+                    <i class="fa fa-close"></i>
+                </button>
+            </span>
+        </div>
+        <br>
+    </div>
+    <!-- More selection -->
+    <div class="add"></div>
+    <!-- Add button -->
+    <button class="btn btn-default pull-right" onclick="addOption()" type="button">
+        <i class="fa fa-plus"></i>
+    </button>
+    <!-- Submit button -->
+    <br>
+    <section>
+        <button class="progress-button" data-horizontal data-perspective data-style="rotate-side-up"
+                onclick="submitVote()">Submit
+        </button>
+    </section>
+    <br>
+</div>
+
+<br>
+
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted" th:text="'© ️' + ${YEAR}"></span><span>&nbsp;<a href=https://github.com/AdlerED/Voter>Voter</a></span>
+    </div>
+</footer>
+
+<script src="/static/jquery/jquery-3.4.1.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/icheck.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/static/progress/js/classie.js"></script>
+<script src="/static/progress/js/progressButton.js"></script>
+<script>
+    [].slice.call(document.querySelectorAll('button.progress-button')).forEach(function (bttn) {
+        new ProgressButton(bttn, {
+            callback: function (instance) {
+                var progress = 0,
+                    interval = setInterval(function () {
+                        progress = Math.min(progress + Math.random() * 0.1, 1);
+                        instance._setProgress(progress);
+
+                        if (progress === 1) {
+                            instance._stop(1);
+                            clearInterval(interval);
+                        }
+                    }, 200);
+            }
+        });
+    });
+</script>
+<script>
+    function submitVote() {
+        setTimeout(function () {
+            //Build serial
+            var build = "";
+            for (var i = 1; i <= options; ++i) {
+                var num = i;
+                var count = 0;
+                var selectionText = $("#option" + i).val();
+                build += "<%" + num + "<%" + count + "<%" + selectionText;
+            }
+            params = {};
+            params.title = $("#voteTitle").val();
+            params.describe = $("#voteDescribe").val();
+            params.selection = build;
+            params.type = mode;
+            params.limit = $("#modeInput").val();
+            if (mode == 1) {
+                params.limit = -1;
+            }
+            console.log(params);
+            $.ajax({
+                url: "/voterSubmit",
+                data: params,
+                success: function (data) {
+                    alert(data);
+                }
+            });
+            console.log(build);
+        }, 1000);
+    }
+</script>
+<script>
+    var mode = 0;
+
+    function singleElection() {
+        mode = 1;
+        $("#mode").html("Single election <span class=\"caret\"></span>");
+        $("#modeInput").attr("disabled", "");
+    }
+
+    function multipleSelection() {
+        mode = 0;
+        $("#mode").html("Multiple selection <span class=\"caret\"></span>");
+        $("#modeInput").removeAttr("disabled");
+    }
+</script>
+<script>
+    var options = 3;
+
+    function addOption() {
+        $("#close" + options).remove();
+        ++options;
+        var append = "" +
+            "    <div class=\"option" + options + "\">\n" +
+            "        <div class=\"input-group\">\n" +
+            "            <span class=\"input-group-addon\">Option " + options + "</span>\n" +
+            "            <input class=\"form-control\" id=\"option" + options + "\" type=\"text\">\n" +
+            "            <div class=\"cls\"></div>\n" +
+            "            <span class=\"input-group-btn\" id=\"close" + options + "\">\n" +
+            "                <button class=\"btn btn-default\" type=\"button\" onclick=\"delOption()\">\n" +
+            "                    <i class=\"fa fa-close\"></i>\n" +
+            "                </button>\n" +
+            "            </span>\n" +
+            "        </div>\n" +
+            "        <br>\n" +
+            "    </div>";
+        $(".add").append(append);
+    }
+
+    function delOption() {
+        $(".option" + options).remove();
+        --options;
+        $(".option" + options + " .cls").after("" +
+            "            <span class=\"input-group-btn\" id=\"close" + options + "\">\n" +
+            "                <button class=\"btn btn-default\" type=\"button\" onclick=\"delOption()\">\n" +
+            "                    <i class=\"fa fa-close\"></i>\n" +
+            "                </button>\n" +
+            "            </span>");
+    }
+</script>
+</body>
+</html>

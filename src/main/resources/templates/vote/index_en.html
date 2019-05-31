@@ -42,7 +42,7 @@
         <h2 th:text="${Title}"></h2>
         <h4 th:text="${Describe}"></h4>
         <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">Make a <b>multiple selection</b> : )</p>
-        <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 1">Make a <b>mingle election</b> : )</p>
+        <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 1">Make a <b>single election</b> : )</p>
         <p th:if="${Limit} != -1">
             <i class="fa fa-info"></i>&nbsp;<span th:text="'Select limit: ' + ${Limit}"></span>
         </p>

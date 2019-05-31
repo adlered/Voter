@@ -83,6 +83,7 @@ function vote(VID, selected) {
             data: params,
             success: function (data) {
                 if (data == 1) {
+                    successful();
                     var list = selected.split(",");
                     list.forEach(function (value) {
                         var count = $("#progress" + value + " .count").text();
@@ -94,7 +95,6 @@ function vote(VID, selected) {
                         $("#progress" + value).removeClass("progress-bar-success");
                         $("#progress" + value).addClass("progress-bar-info");
                     });
-                    successful();
                 } else if (data == 0) {
                     only1Time();
                 }

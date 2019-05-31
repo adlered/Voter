@@ -1,9 +1,6 @@
 package pers.adlered.voter.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import pers.adlered.voter.dao.Vote;
 
 @Mapper
@@ -16,4 +13,14 @@ public interface VoteMapper {
 
     @Update("UPDATE Voter_Vote SET Selection = #{Selection} WHERE VID = #{VID}")
     int vote(@Param("Selection") String selection, @Param("VID") Integer VID);
+
+    @Insert("INSERT INTO Voter_Vote" +
+            " (Title, `Describe`, Selection, Type, `Limit`) VALUES" +
+            " (#{title}, #{describe}, #{selection}, #{type}, #{limit})")
+    void insertVote(@Param("title") String title, @Param("describe") String describe, @Param("selection") String selection, @Param("type") Integer type, @Param("limit") Integer limit);
+
+    @Select("SELECT VID FROM Voter_Vote WHERE" +
+            " Title = #{title} AND `Describe` = #{describe} AND Selection = #{selection} AND Type = #{type} AND `Limit` = #{limit}" +
+            " ORDER BY VID DESC LIMIT 1")
+    Integer queryVoteID(@Param("title") String title, @Param("describe") String describe, @Param("selection") String selection, @Param("type") Integer type, @Param("limit") Integer limit);
 }

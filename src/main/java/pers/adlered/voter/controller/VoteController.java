@@ -1,5 +1,6 @@
 package pers.adlered.voter.controller;
 
+import com.google.common.util.concurrent.RateLimiter;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,16 +12,24 @@ import pers.adlered.voter.analyzer.Selection;
 import pers.adlered.voter.analyzer.Serialize;
 import pers.adlered.voter.dao.Select;
 import pers.adlered.voter.dao.Vote;
+import pers.adlered.voter.limit.IpUtil;
+import pers.adlered.voter.limit.LoadingCacheServiceImpl;
 import pers.adlered.voter.mapper.VoteMapper;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 @Controller
 public class VoteController {
     @Autowired
     VoteMapper voteMapper;
+    @Resource
+    LoadingCacheServiceImpl loadingCacheService;
 
     @RequestMapping("/vote/{VID}")
     public ModelAndView showVote(@PathVariable Integer VID) {
@@ -33,7 +42,6 @@ public class VoteController {
             modelAndView.addObject("Type", vote.getType());
             modelAndView.addObject("Limit", vote.getLimit());
         } catch (NullPointerException NPE) {
-
         }
         //Selection process
         List<Map<String, String>> selects = Selection.analyze(vote.getSelection());
@@ -50,6 +58,70 @@ public class VoteController {
         } catch (Exception e) {
             return 0;
         }
+    }
+
+    @RequestMapping("/voterSubmit")
+    @ResponseBody
+    public String voterSubmit(String title, String describe, String selection, String type, String limit) {
+        return "";
+    }
+
+    @RequestMapping("/submitVote")
+    @ResponseBody
+    public String submitVote(HttpServletRequest request, Integer VID, String selected) {
+        String ipAddr = IpUtil.getIpAddr(request);
+        try {
+            RateLimiter limiter = loadingCacheService.getRateLimiter(ipAddr);
+            if(limiter.tryAcquire()){
+                //PASS
+                //Get VID info
+                Vote vote = voteMapper.getVote(VID);
+                String selectionSerial = vote.getSelection();
+                //Package and readout
+                List<Map<String, String>> selects = Selection.analyze(selectionSerial);
+                //Split selection
+                String selectedList[] = selected.split(",");
+                //Convert to Integer
+                Integer selList[] = new Integer[selectedList.length];
+                Integer i = 0;
+                for (String sel : selectedList) {
+                    selList[i] = Integer.parseInt(sel);
+                    ++i;
+                }
+                //Write changes
+                //Generate new List
+                List<Map<String, String>> newList = new ArrayList<Map<String, String>>();
+                //Change one by one
+                for (int voteFor = 0; voteFor < selects.size(); ++voteFor) {
+                    Map<String, String> stringMap = selects.get(voteFor);
+                    boolean flag = false;
+                    //Submit
+                    for (Integer sel : selList) {
+                        if (Integer.parseInt(stringMap.get("num")) == sel) {
+                            flag = true;
+                        }
+                    }
+                    if (flag) {
+                        //Change
+                        Integer before = Integer.parseInt(stringMap.get("count"));
+                        Integer after = before + 1;
+                        stringMap.put("count", String.valueOf(after));
+                    }
+                    newList.add(stringMap);
+                }
+                //To serial
+                String serial = Serialize.makeSerial(newList);
+                //Update to database
+                voteMapper.vote(serial, VID);
+                return "1";
+            }else {
+                //DENIED
+                return "0";
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return "0";
     }
 
     @RequestMapping("/serialize")

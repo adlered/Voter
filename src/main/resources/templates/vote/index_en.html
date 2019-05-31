@@ -88,7 +88,7 @@
     </div>
     <br>
     <!-- Submit button -->
-    <button id="submitButton" class="btn btn-default" th:onclick="|submitVote(${Type})|" type="button"><i class="fa fa-hand-stop-o"></i> Submit</button>
+    <button id="submitButton" class="btn btn-default" th:onclick="|submitVote(${Type}, ${VoteID})|" type="button"><i class="fa fa-hand-stop-o"></i> Submit</button>
     <!-- Alert window, controlled by JS -->
     <br><div class="alert"></div>
 </div>

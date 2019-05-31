@@ -11,14 +11,12 @@ function eventOnSelect(limit) {
     });
 }
 
-function submitVote(choice) {
+function submitVote(choice, VID) {
     if (choice == 1) {
         wait();
         var result = $("input[name='optionsRadios']:checked").attr("id");
         if (result != undefined) {
-            setTimeout(function () {
-                successful();
-            }, 2000);
+            vote(VID, result);
         } else {
             emptySet();
         }
@@ -31,9 +29,7 @@ function submitVote(choice) {
                 checkBoxes.push(obj[i].getAttribute("id"));
         }
         if (checkBoxes.length != 0) {
-            setTimeout(function () {
-                successful();
-            }, 2000);
+            vote(VID, checkBoxes.toString());
         } else {
             emptySet();
         }
@@ -67,7 +63,29 @@ function connectionRefused() {
     $("#submitButton").html("<i class=\"fa fa-rotate-right\"></i> Retry");
 }
 
+function only1Time() {
+    $(".alert").html("<br><div class=\"alert alert-danger\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Sorry, You can't vote for this anymore！</strong>You can just vote for 1 time.</div>")
+    $("#submitButton").html("<i class=\"fa fa-rotate-right\"></i> Retry");
+}
+
 function invalidRule() {
     $(".alert").html("<br><div class=\"alert alert-danger\"><a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a><strong>Sorry, try again！</strong>Invalid vote rule. (R U Hacking?)</div>")
     $("#submitButton").html("<i class=\"fa fa-rotate-right\"></i> Retry");
+}
+
+function vote(VID, selected) {
+    var params = {};
+    params.VID = VID;
+    params.selected = selected;
+    $.ajax({
+        url: "/submitVote",
+        data: params,
+        success: function (data) {
+            if (data == 1) {
+                successful();
+            } else if (data == 0) {
+                only1Time();
+            }
+        }
+    })
 }

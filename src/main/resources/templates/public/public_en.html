@@ -26,19 +26,19 @@
     </p>
     <!-- Options -->
     <!-- TITLE -->
-    <div class="input-group">
+    <div class="input-group" id="borderTitle">
         <span class="input-group-addon"><i class="fa fa-quote-left"></i></span>
         <input aria-describedby="basic-addon1" class="form-control" id="voteTitle" placeholder="Vote title" type="text">
     </div>
     <br>
     <!-- DESCRIBE -->
-    <div class="input-group">
+    <div class="input-group" id="borderDescribe">
         <textarea class="form-control" id="voteDescribe" name=textarea placeholder="Vote describe" rows="3"></textarea>
         <span class="input-group-addon"><i class="fa fa-quote-right"></i></span>
     </div>
     <br>
     <!-- MODE AND MAXIMUM -->
-    <div class="input-group">
+    <div class="input-group" id="status">
         <div class="input-group-btn">
             <button aria-expanded="false" aria-haspopup="true" class="btn btn-default dropdown-toggle"
                     data-toggle="dropdown" id="mode"
@@ -48,19 +48,24 @@
                 <li><a href="javascript: void(0);" onclick="multipleSelection()">Multiple selection</a></li>
             </ul>
         </div>
-        <input class="form-control" id="modeInput" placeholder="Maximum Selection of Items" type="text">
+        <input class="form-control" id="modeInput" placeholder="( '-1' is unlimited ) Maximum Selection of Items"
+               type="text">
     </div>
     <!-- LINE -->
     <p class="page-header"></p>
     <!-- OPTIONS -->
-    <div class="input-group">
-        <span class="input-group-addon">Option 1</span>
-        <input class="form-control" id="option1" type="text">
+    <div class="option1">
+        <div class="input-group">
+            <span class="input-group-addon">Option 1</span>
+            <input class="form-control" id="option1" type="text">
+        </div>
     </div>
     <br>
-    <div class="input-group">
-        <span class="input-group-addon">Option 2</span>
-        <input class="form-control" id="option2" type="text">
+    <div class="option2">
+        <div class="input-group">
+            <span class="input-group-addon">Option 2</span>
+            <input class="form-control" id="option2" type="text">
+        </div>
     </div>
     <br>
     <div class="option3">
@@ -83,7 +88,7 @@
         <i class="fa fa-plus"></i>
     </button>
     <!-- Submit button -->
-    <br>
+    <p><div class="isError"></div></p>
     <section>
         <button class="progress-button" data-horizontal data-perspective data-style="rotate-side-up"
                 onclick="submitVote()">Submit
@@ -120,93 +125,11 @@
                             instance._stop(1);
                             clearInterval(interval);
                         }
-                    }, 200);
+                    }, 100);
             }
         });
     });
 </script>
-<script>
-    function submitVote() {
-        setTimeout(function () {
-            //Build serial
-            var build = "";
-            for (var i = 1; i <= options; ++i) {
-                var num = i;
-                var count = 0;
-                var selectionText = $("#option" + i).val();
-                build += "<%" + num + "<%" + count + "<%" + selectionText;
-            }
-            params = {};
-            params.title = $("#voteTitle").val();
-            params.describe = $("#voteDescribe").val();
-            params.selection = build;
-            params.type = mode;
-            params.limit = $("#modeInput").val();
-            if (mode == 1) {
-                params.limit = -1;
-            }
-            console.log(params);
-            $.ajax({
-                url: "/voterSubmit",
-                data: params,
-                success: function (data) {
-                    setTimeout(function () {
-                        location.href = "/vote/" + data;
-                    }, 1000);
-                }
-            });
-            console.log(build);
-        }, 1000);
-    }
-</script>
-<script>
-    var mode = 0;
-
-    function singleElection() {
-        mode = 1;
-        $("#mode").html("Single election <span class=\"caret\"></span>");
-        $("#modeInput").attr("disabled", "");
-    }
-
-    function multipleSelection() {
-        mode = 0;
-        $("#mode").html("Multiple selection <span class=\"caret\"></span>");
-        $("#modeInput").removeAttr("disabled");
-    }
-</script>
-<script>
-    var options = 3;
-
-    function addOption() {
-        $("#close" + options).remove();
-        ++options;
-        var append = "" +
-            "    <div class=\"option" + options + "\">\n" +
-            "        <div class=\"input-group\">\n" +
-            "            <span class=\"input-group-addon\">Option " + options + "</span>\n" +
-            "            <input class=\"form-control\" id=\"option" + options + "\" type=\"text\">\n" +
-            "            <div class=\"cls\"></div>\n" +
-            "            <span class=\"input-group-btn\" id=\"close" + options + "\">\n" +
-            "                <button class=\"btn btn-default\" type=\"button\" onclick=\"delOption()\">\n" +
-            "                    <i class=\"fa fa-close\"></i>\n" +
-            "                </button>\n" +
-            "            </span>\n" +
-            "        </div>\n" +
-            "        <br>\n" +
-            "    </div>";
-        $(".add").append(append);
-    }
-
-    function delOption() {
-        $(".option" + options).remove();
-        --options;
-        $(".option" + options + " .cls").after("" +
-            "            <span class=\"input-group-btn\" id=\"close" + options + "\">\n" +
-            "                <button class=\"btn btn-default\" type=\"button\" onclick=\"delOption()\">\n" +
-            "                    <i class=\"fa fa-close\"></i>\n" +
-            "                </button>\n" +
-            "            </span>");
-    }
-</script>
+<script src="/static/js/pub/action_en.js"></script>
 </body>
 </html>

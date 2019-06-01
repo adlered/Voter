@@ -10,8 +10,12 @@ import java.util.Date;
 @Controller
 public class MainController {
     @RequestMapping("/")
-    public String index() {
-        return "/index";
+    public ModelAndView index() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        ModelAndView modelAndView = new ModelAndView("/index");
+        modelAndView.addObject("YEAR", simpleDateFormat.format(date));
+        return modelAndView;
     }
 
     @RequestMapping("/public/en")

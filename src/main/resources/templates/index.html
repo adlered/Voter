@@ -1,44 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Voter</title>
-</head>
-<body>
-<h2>Voter - Anonymous Vote System | 匿名投票系统</h2>
-VoteID: <input type="text" id="VoteID"/>
-<button onclick="toVoteID()">GO</button>
-<br><br>
-Please specific VoteID into address bar ( /vote/{VoteID} ) or <a href="/public/en"><b>LAUNCH A VOTE (In English)</b></a>
-<br>
-请在地址栏中指定投票号 ( /vote/{VoteID} ) 或 <a href="/public/cn"><b>发起一个投票（使用中文）</b></a>
-<br><br>
-<b>Voter</b> is an anonymous vote website, and the voters were also anonymous. To ensure security, you can issue votes, but you can't modify or delete any votes.
-<br>
-<b>Voter</b> 是一个匿名投票站点，投票发起者同样是匿名的。所以为了确保安全，你可以发起投票，但不能修改或删除任何投票。
-<script src="/static/jquery/jquery-3.4.1.min.js"></script>
-<script>
-    $("#VoteID").keydown(function() {
-        if (event.keyCode == "13") {//keyCode=13是回车键
-            toVoteID();
-        }
-    });
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
-    function toVoteID() {
-        var voteID = $("#VoteID").val();
-        $.ajax({
-            url: "/checkVoteID/" + voteID,
-            success: function (data) {
-                if (data == 1) {
-                    //Exist
-                    location.href = "/vote/" + voteID;
-                } else if (data == 0) {
-                    //Not exist
-                    alert("VoteID not found! Please try again.")
-                }
+    <title>Welcome - Voter</title>
+
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom stylesheet -->
+    <link href="/static/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/pub/sticky_footer_navbar.css" rel="stylesheet">
+    <link href="/static/progress/css/component.css" rel="stylesheet" type="text/css"/>
+
+    <!-- Custom script -->
+    <script src="/static/progress/js/modernizr.custom.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logo" style="cursor: pointer;">Voter</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="javascript: void(0);" data-target="#toVoteID" data-toggle="modal">VoteID ..</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" role="main">
+    <h1 class="mt-5">Voter - Anonymous Vote System | 匿名投票系统</h1>
+    <p class="lead">
+        <br>
+        <b>Voter</b> is an anonymous vote website, and the voters were also anonymous. To ensure security, you can issue
+        votes, but you can't modify or delete any votes.
+        <br><br>
+        <b>Voter</b> 是一个匿名投票站点，投票发起者同样是匿名的。所以为了确保安全，你可以发起投票，但不能修改或删除任何投票。
+    </p>
+    <br>
+    <div class="btn-group btn-group-lg" role="group" aria-label="...">
+        <button type="button" class="btn btn-info" onclick="javascript: location.href = '/public/en'">Launch a vote ( In
+            language: English )
+        </button>
+        <button type="button" class="btn btn-danger" onclick="javascript: location.href = '/public/cn'">发起一次投票（
+            使用语言：简体中文 ）
+        </button>
+    </div>
+</div>
+
+<br>
+
+<footer class="footer">
+    <div class="container">
+        <br>
+        <span class="text-muted" th:text="'© ️' + ${YEAR}"></span><span>&nbsp;<a href=https://github.com/AdlerED/Voter>Voter</a></span>
+    </div>
+</footer>
+
+<script src="/static/jquery/jquery-3.4.1.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/js/icheck.min.js"></script>
+
+<!-- Custom JS -->
+<script src="/static/progress/js/classie.js"></script>
+<script src="/static/progress/js/progressButton.js"></script>
+<script>
+    [].slice.call(document.querySelectorAll('button.progress-button')).forEach(function (bttn) {
+        new ProgressButton(bttn, {
+            callback: function (instance) {
+                var progress = 0,
+                    interval = setInterval(function () {
+                        progress = Math.min(progress + Math.random() * 0.1, 1);
+                        instance._setProgress(progress);
+
+                        if (progress === 1) {
+                            instance._stop(1);
+                            clearInterval(interval);
+                        }
+                    }, 100);
             }
         });
-    }
+    });
 </script>
+<script src="/static/js/pub/action_cn.js"></script>
+
+<span th:replace="/vote/modal/toVoteID_cn"></span>
+
+<script src="/static/js/vote/toVoteID.js"></script>
 </body>
 </html>

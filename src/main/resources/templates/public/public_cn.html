@@ -11,7 +11,7 @@
 
     <!-- Custom stylesheet -->
     <link href="/static/fontawesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/static/css/pub/sticky_footer.css" rel="stylesheet">
+    <link href="/static/css/pub/sticky_footer_navbar.css" rel="stylesheet">
     <link href="/static/progress/css/component.css" rel="stylesheet" type="text/css"/>
 
     <!-- Custom script -->
@@ -19,6 +19,26 @@
 </head>
 
 <body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand logo" style="cursor:pointer;" data-target="#mainPage" data-toggle="modal">Voter</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">发起投票</a></li>
+                <li><a href="javascript: void(0);" data-target="#toVoteID" data-toggle="modal">前往 VoteID ..</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="container" role="main">
     <h1 class="mt-5">发起投票</h1>
     <p class="lead">填写下方选项来发起一次投票, 无需登录。</p>
@@ -101,6 +121,7 @@
 
 <footer class="footer">
     <div class="container">
+        <br>
         <span class="text-muted" th:text="'© ️' + ${YEAR}"></span><span>&nbsp;<a href=https://github.com/AdlerED/Voter>Voter</a></span>
     </div>
 </footer>
@@ -131,5 +152,10 @@
     });
 </script>
 <script src="/static/js/pub/action_cn.js"></script>
+
+<span th:replace="/vote/modal/toIndex_cn"></span>
+<span th:replace="/vote/modal/toVoteID_cn"></span>
+
+<script src="/static/js/vote/toVoteID.js"></script>
 </body>
 </html>

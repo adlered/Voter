@@ -31,10 +31,25 @@ public class VoteController {
     @Resource
     LoadingCacheServiceImpl loadingCacheService;
 
-    @RequestMapping("/vote/{VID}")
-    public ModelAndView showVote(@PathVariable Integer VID) {
+    @RequestMapping("/vote/en/{VID}")
+    public ModelAndView showVoteEN(@PathVariable Integer VID) {
         Vote vote = voteMapper.getVote(VID);
         ModelAndView modelAndView = new ModelAndView("/vote/index_en");
+        modelAndView.addObject("VoteID", vote.getVID());
+        modelAndView.addObject("Title", vote.getTitle());
+        modelAndView.addObject("Describe", vote.getDescribe());
+        modelAndView.addObject("Type", vote.getType());
+        modelAndView.addObject("Limit", vote.getLimit());
+        //Selection process
+        List<Map<String, String>> selects = Selection.analyze(vote.getSelection());
+        modelAndView.addObject("Selection", selects);
+        return modelAndView;
+    }
+
+    @RequestMapping("/vote/cn/{VID}")
+    public ModelAndView showVoteCN(@PathVariable Integer VID) {
+        Vote vote = voteMapper.getVote(VID);
+        ModelAndView modelAndView = new ModelAndView("/vote/index_cn");
         modelAndView.addObject("VoteID", vote.getVID());
         modelAndView.addObject("Title", vote.getTitle());
         modelAndView.addObject("Describe", vote.getDescribe());

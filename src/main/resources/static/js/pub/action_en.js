@@ -27,7 +27,7 @@ function submitVote() {
                         if (data == -7426) {
                             $(".isError").html("<font color='red'>Invalid input :( </font>Please check.");
                         } else {
-                            location.href = "/vote/" + data;
+                            location.href = "/vote/en/" + data;
                         }
                     }, 1000);
                 }

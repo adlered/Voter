@@ -28,8 +28,8 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="javascript: void(0);" th:text="'For VoteID ' + ${VoteID}"></a></li>
-                <li><a href="javascript: void(0);" data-target="#toVoteID" data-toggle="modal">To VoteID ..</a></li>
+                <li class="active"><a href="javascript: void(0);" th:text="'为 VoteID ' + ${VoteID} + ' 投票'"></a></li>
+                <li><a href="javascript: void(0);" data-target="#toVoteID" data-toggle="modal">前往 VoteID ..</a></li>
             </ul>
         </div>
     </div>
@@ -39,10 +39,10 @@
     <div class="title">
         <h2 th:text="${Title}"></h2>
         <h4 th:text="${Describe}"></h4>
-        <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">Make a <b>multiple selection</b> : )</p>
-        <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 1">Make a <b>single election</b> : )</p>
+        <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">请做 <b>多项选择</b> : )</p>
+        <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 1">请做 <b>单项选择</b> : )</p>
         <p th:if="${Limit} != -1">
-            <i class="fa fa-info"></i>&nbsp;<span th:text="'Select limit: ' + ${Limit}"></span>
+            <i class="fa fa-info"></i>&nbsp;<span th:text="'最多选择选项：' + ${Limit}"></span>
         </p>
     </div>
 </div>
@@ -70,7 +70,8 @@
                     <div class="vote">
                         <div class="checkbox" th:if="${Type} == 0">
                             <label>
-                                <input class="selections" th:id="${entries['num']}" name="optionsCheckbox" type="checkbox">
+                                <input class="selections" th:id="${entries['num']}" name="optionsCheckbox"
+                                       type="checkbox">
                             </label>
                         </div>
 
@@ -86,21 +87,24 @@
     </div>
     <br>
     <!-- Submit button -->
-    <button id="submitButton" class="btn btn-default" th:onclick="|submitVote(${Type}, ${VoteID})|" type="button"><i class="fa fa-hand-stop-o"></i> Submit</button>
+    <button id="submitButton" class="btn btn-default" th:onclick="|submitVote(${Type}, ${VoteID})|" type="button"><i
+            class="fa fa-hand-stop-o"></i> 确定提交
+    </button>
     <!-- Alert window, controlled by JS -->
-    <br><div class="alert"></div>
+    <br>
+    <div class="alert"></div>
 </div>
 
-<span th:replace="/vote/modal/toIndex_en"></span>
-<span th:replace="/vote/modal/toVoteID_en"></span>
+<span th:replace="/vote/modal/toIndex_cn"></span>
+<span th:replace="/vote/modal/toVoteID_cn"></span>
 
 <script src="/static/jquery/jquery-3.4.1.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/bootstrap/js/icheck.min.js"></script>
 
 <!-- Custom JS -->
-<script src="/static/js/vote/submit_en.js"></script>
-<script src="/static/js/vote/toVoteID_en.js"></script>
+<script src="/static/js/vote/submit_cn.js"></script>
+<script src="/static/js/vote/toVoteID_cn.js"></script>
 <script>
     eventOnSelect([[${Limit}]]);
 </script>

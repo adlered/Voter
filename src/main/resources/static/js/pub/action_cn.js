@@ -27,7 +27,7 @@ function submitVote() {
                         if (data == -7426) {
                             $(".isError").html("<font color='red'>非法输入 :( </font>请检查。");
                         } else {
-                            location.href = "/vote/" + data;
+                            location.href = "/vote/cn/" + data;
                         }
                     }, 1000);
                 }

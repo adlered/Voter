@@ -14,11 +14,20 @@ public class MainController {
         return "/index";
     }
 
-    @RequestMapping("/public")
-    public ModelAndView pub() {
+    @RequestMapping("/public/en")
+    public ModelAndView pubEn() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
         Date date = new Date();
         ModelAndView modelAndView = new ModelAndView("/public/public_en");
+        modelAndView.addObject("YEAR", simpleDateFormat.format(date));
+        return modelAndView;
+    }
+
+    @RequestMapping("/public/cn")
+    public ModelAndView pubCn() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        ModelAndView modelAndView = new ModelAndView("/public/public_cn");
         modelAndView.addObject("YEAR", simpleDateFormat.format(date));
         return modelAndView;
     }

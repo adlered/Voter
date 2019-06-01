@@ -25,7 +25,7 @@ function submitVote() {
                 success: function (data) {
                     setTimeout(function () {
                         if (data == -7426) {
-                            $(".isError").html("<font color='red'>Invalid input :( </font>Please check.");
+                            $(".isError").html("<font color='red'>非法输入 :( </font>请检查。");
                         } else {
                             location.href = "/vote/" + data;
                         }
@@ -33,7 +33,7 @@ function submitVote() {
                 }
             });
         } else {
-            $(".isError").html("<font color='red'>Invalid input :( </font>Please check.");
+            $(".isError").html("<font color='red'>非法输入 :( </font>请检查。");
         }
     }, 800);
 }
@@ -42,14 +42,14 @@ var mode = 0;
 
 function singleElection() {
     mode = 1;
-    $("#mode").html("Single election <span class=\"caret\"></span>");
+    $("#mode").html("单项选择 <span class=\"caret\"></span>");
     $("#modeInput").attr("disabled", "");
     $("#modeInput").val("-1");
 }
 
 function multipleSelection() {
     mode = 0;
-    $("#mode").html("Multiple selection <span class=\"caret\"></span>");
+    $("#mode").html("多项选择 <span class=\"caret\"></span>");
     $("#modeInput").removeAttr("disabled");
 }
 
@@ -61,7 +61,7 @@ function addOption() {
     var append = "" +
         "    <div class=\"option" + options + "\">\n" +
         "        <div class=\"input-group\">\n" +
-        "            <span class=\"input-group-addon\">Option " + options + "</span>\n" +
+        "            <span class=\"input-group-addon\">选项 " + options + "</span>\n" +
         "            <input class=\"form-control\" id=\"option" + options + "\" type=\"text\">\n" +
         "            <div class=\"cls\"></div>\n" +
         "            <span class=\"input-group-btn\" id=\"close" + options + "\">\n" +

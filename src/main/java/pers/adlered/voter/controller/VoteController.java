@@ -60,6 +60,17 @@ public class VoteController {
     @RequestMapping("/voterSubmit")
     @ResponseBody
     public Integer voterSubmit(String title, String describe, String selection, Integer type, Integer limit) {
+        //Verify
+        if (title == "") {
+            return -7426;
+        }
+        if (describe == "") {
+            return -7426;
+        }
+        if (limit < -1 || limit == 0) {
+            return -7426;
+        }
+        //Update
         try {
             voteMapper.insertVote(title, describe, selection, type, limit);
             Integer VID = voteMapper.queryVoteID(title, describe, selection, type, limit);

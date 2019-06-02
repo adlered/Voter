@@ -22,16 +22,16 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
+            <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar"
+                    data-toggle="collapse" type="button">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand logo" style="cursor: pointer;">Voter</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li><a href="javascript: void(0);" data-target="#toVoteID" data-toggle="modal">VoteID ..</a></li>
+                <li><a data-target="#toVoteID" data-toggle="modal" href="javascript: void(0);">VoteID ..</a></li>
             </ul>
         </div>
     </div>
@@ -39,6 +39,9 @@
 
 <div class="container" role="main">
     <h1 class="mt-5">Voter - Anonymous Vote System | 匿名投票系统</h1>
+    <button class="btn btn-default" type="button" data-target="#toVoteID" data-toggle="modal">To VoteID | 跳转至 VoteID
+        ..
+    </button>
     <p class="lead">
         <br>
         <b>Voter</b> is an anonymous vote website, and the voters were also anonymous. To ensure security, you can issue
@@ -47,14 +50,13 @@
         <b>Voter</b> 是一个匿名投票站点，投票发起者同样是匿名的。所以为了确保安全，你可以发起投票，但不能修改或删除任何投票。
     </p>
     <br>
-    <div class="btn-group btn-group-lg" role="group" aria-label="...">
-        <button type="button" class="btn btn-info" onclick="javascript: location.href = '/public/en'">Launch a vote ( In
-            language: English )
-        </button>
-        <button type="button" class="btn btn-danger" onclick="javascript: location.href = '/public/cn'">发起一次投票（
-            使用语言：简体中文 ）
-        </button>
-    </div>
+    <button class="btn btn-info btn-lg" onclick="location.href = '/public/en'" type="button">Launch a vote (
+        In
+        language: English )
+    </button>
+    <button class="btn btn-danger btn-lg" onclick="location.href = '/public/cn'" type="button">发起一次投票（
+        使用语言：简体中文 ）
+    </button>
 </div>
 
 <br>

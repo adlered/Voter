@@ -161,4 +161,5 @@ function clearAllError() {
     $("#borderTitle").removeClass("has-error");
     $("#borderDescribe").removeClass("has-error");
     $("#status").removeClass("has-error");
+    $(".isError").html("");
 }

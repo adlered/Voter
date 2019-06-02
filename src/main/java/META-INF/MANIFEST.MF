@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Class-Path: spring-jcl-5.1.7.RELEASE.jar jackson-datatype-jsr310-2.9.8
+ .jar mybatis-spring-2.0.1.jar spring-boot-test-2.1.5.RELEASE.jar asse
+ rtj-core-3.11.1.jar guava-18.0.jar HikariCP-3.2.0.jar spring-test-5.1
+ .7.RELEASE.jar json-smart-2.3.jar mybatis-3.5.1.jar spring-boot-start
+ er-test-2.1.5.RELEASE.jar log4j-to-slf4j-2.11.2.jar hibernate-validat
+ or-6.0.16.Final.jar classmate-1.4.0.jar attoparser-2.0.5.RELEASE.jar 
+ spring-boot-starter-thymeleaf-2.1.5.RELEASE.jar mybatis-spring-boot-a
+ utoconfigure-2.0.1.jar logback-classic-1.2.3.jar json-path-2.4.0.jar 
+ spring-core-5.1.7.RELEASE.jar jboss-logging-3.3.2.Final.jar accessors
+ -smart-1.2.jar byte-buddy-agent-1.9.12.jar validation-api-2.0.1.Final
+ .jar objenesis-2.6.jar thymeleaf-spring5-3.0.11.RELEASE.jar spring-tx
+ -5.1.7.RELEASE.jar javax.annotation-api-1.3.2.jar junit-4.12.jar slf4
+ j-api-1.7.26.jar byte-buddy-1.9.12.jar mockito-core-2.23.4.jar spring
+ -boot-starter-jdbc-2.1.5.RELEASE.jar tomcat-embed-websocket-9.0.19.ja
+ r log4j-api-2.11.2.jar unbescape-1.1.6.RELEASE.jar spring-aop-5.1.7.R
+ ELEASE.jar asm-5.0.4.jar xmlunit-core-2.6.2.jar android-json-0.0.2013
+ 1108.vaadin1.jar mysql-connector-java-8.0.16.jar spring-boot-starter-
+ tomcat-2.1.5.RELEASE.jar spring-boot-starter-json-2.1.5.RELEASE.jar s
+ pring-web-5.1.7.RELEASE.jar hamcrest-core-1.3.jar logback-core-1.2.3.
+ jar spring-boot-devtools-2.1.5.RELEASE.jar spring-jdbc-5.1.7.RELEASE.
+ jar jackson-annotations-2.9.0.jar tomcat-embed-core-9.0.19.jar tomcat
+ -embed-el-9.0.19.jar thymeleaf-extras-java8time-3.0.4.RELEASE.jar thy
+ meleaf-3.0.11.RELEASE.jar snakeyaml-1.23.jar jackson-module-parameter
+ -names-2.9.8.jar spring-boot-test-autoconfigure-2.1.5.RELEASE.jar spr
+ ing-boot-starter-logging-2.1.5.RELEASE.jar spring-expression-5.1.7.RE
+ LEASE.jar spring-boot-autoconfigure-2.1.5.RELEASE.jar jackson-databin
+ d-2.9.8.jar jackson-core-2.9.8.jar jul-to-slf4j-1.7.26.jar spring-boo
+ t-starter-web-2.1.5.RELEASE.jar spring-beans-5.1.7.RELEASE.jar hamcre
+ st-library-1.3.jar spring-webmvc-5.1.7.RELEASE.jar spring-boot-2.1.5.
+ RELEASE.jar spring-context-5.1.7.RELEASE.jar mybatis-spring-boot-star
+ ter-2.0.1.jar jackson-datatype-jdk8-2.9.8.jar jsonassert-1.5.0.jar sp
+ ring-boot-starter-2.1.5.RELEASE.jar
+Main-Class: pers.adlered.voter.VoterApplication
+

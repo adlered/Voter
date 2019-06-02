@@ -73,28 +73,6 @@
 <script src="/static/bootstrap/js/icheck.min.js"></script>
 
 <!-- Custom JS -->
-<script src="/static/progress/js/classie.js"></script>
-<script src="/static/progress/js/progressButton.js"></script>
-<script>
-    [].slice.call(document.querySelectorAll('button.progress-button')).forEach(function (bttn) {
-        new ProgressButton(bttn, {
-            callback: function (instance) {
-                var progress = 0,
-                    interval = setInterval(function () {
-                        progress = Math.min(progress + Math.random() * 0.1, 1);
-                        instance._setProgress(progress);
-
-                        if (progress === 1) {
-                            instance._stop(1);
-                            clearInterval(interval);
-                        }
-                    }, 100);
-            }
-        });
-    });
-</script>
-<script src="/static/js/pub/action_cn.js"></script>
-
 <span th:replace="/vote/modal/toVoteID_en"></span>
 
 <script src="/static/js/vote/toVoteID_en.js"></script>

@@ -12,10 +12,11 @@
     <!-- Custom stylesheet -->
     <link href="/static/css/vote/vote.css" rel="stylesheet">
     <link href="/static/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/pub/sticky_footer_navbar.css" rel="stylesheet">
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar"
@@ -35,9 +36,9 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container" style="padding: 0 5px 0;">
     <div class="title">
-        <a class="pull-left" href="javascript: void(0);" onclick="switchLang()">-> 简体中文</a>
+        <a class="pull-left" href="javascript: void(0);" onclick="switchLang()">简体中文</a>
         <h2 th:text="${Title}"></h2>
         <h4 th:text="${Describe}"></h4>
         <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">Make a <b>multiple selection</b> : )</p>
@@ -91,6 +92,13 @@
     <!-- Alert window, controlled by JS -->
     <br><div class="alert"></div>
 </div>
+
+<footer class="footer">
+    <div class="container">
+        <br>
+        <span class="text-muted" th:text="'© ️' + ${YEAR}"></span><span>&nbsp;<a href=https://github.com/AdlerED/Voter>Voter</a></span>
+    </div>
+</footer>
 
 <span th:replace="/vote/modal/toIndex_en"></span>
 <span th:replace="/vote/modal/toVoteID_en"></span>

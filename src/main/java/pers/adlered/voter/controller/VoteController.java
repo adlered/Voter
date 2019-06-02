@@ -15,6 +15,7 @@ import pers.adlered.voter.dao.Vote;
 import pers.adlered.voter.limit.IpUtil;
 import pers.adlered.voter.limit.LoadingCacheServiceImpl;
 import pers.adlered.voter.mapper.VoteMapper;
+import pers.adlered.voter.tool.GetDate;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +44,7 @@ public class VoteController {
         //Selection process
         List<Map<String, String>> selects = Selection.analyze(vote.getSelection());
         modelAndView.addObject("Selection", selects);
+        modelAndView.addObject("YEAR", GetDate.year());
         return modelAndView;
     }
 
@@ -58,6 +60,7 @@ public class VoteController {
         //Selection process
         List<Map<String, String>> selects = Selection.analyze(vote.getSelection());
         modelAndView.addObject("Selection", selects);
+        modelAndView.addObject("YEAR", GetDate.year());
         return modelAndView;
     }
 

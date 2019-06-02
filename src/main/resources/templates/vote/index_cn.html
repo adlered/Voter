@@ -13,6 +13,16 @@
     <link href="/static/css/vote/vote.css" rel="stylesheet">
     <link href="/static/fontawesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="/static/css/pub/sticky_footer_navbar.css" rel="stylesheet">
+
+    <!-- QR Code -->
+    <!-- JQuery -->
+    <script src="/static/jquery/jquery-3.4.1.min.js"></script>
+    <!-- Generate Modal -->
+    <span th:replace="/vote/modal/QR_cn.html"></span>
+    <!-- Import QR Generator -->
+    <script src="/static/js/vote/jquery.qrcode.min.js"></script>
+    <!-- Generate QR -->
+    <script src="/static/js/generateQR.js"></script>
 </head>
 
 <body>
@@ -30,7 +40,7 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="javascript: void(0);" th:text="'为 VoteID ' + ${VoteID} + ' 投票'"></a></li>
-                <li><a href="javascript: void(0);" data-target="#toVoteID" data-toggle="modal">前往 VoteID ..</a></li>
+                <li><a data-target="#toVoteID" data-toggle="modal" href="javascript: void(0);">前往 VoteID ..</a></li>
             </ul>
         </div>
     </div>
@@ -39,6 +49,7 @@
 <div class="container" style="padding: 0 5px 0;">
     <div class="title">
         <a class="pull-left" href="javascript: void(0);" onclick="switchLang()">English</a>
+        <br>
         <h2 th:text="${Title}"></h2>
         <h4 th:text="${Describe}"></h4>
         <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">请做 <b>多项选择</b> : )</p>
@@ -56,8 +67,9 @@
                 <!-- Progress -->
                 <div class="col-xs-5" id="divProgress">
                     <div class="progress progress-striped active">
-                        <div th:id="'progress' + ${entries['num']}" aria-valuemax="100" aria-valuemin="0"
-                             aria-valuenow="60" class="progress-bar progress-bar-success" role="progressbar"
+                        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"
+                             class="progress-bar progress-bar-success" role="progressbar"
+                             th:id="'progress' + ${entries['num']}"
                              th:style="'width: ' + ${entries['percent']} + '%;'">
                             <div class="count" th:text="${entries['count']}"></div>
                         </div>
@@ -72,14 +84,14 @@
                     <div class="vote">
                         <div class="checkbox" th:if="${Type} == 0">
                             <label>
-                                <input class="selections" th:id="${entries['num']}" name="optionsCheckbox"
+                                <input class="selections" name="optionsCheckbox" th:id="${entries['num']}"
                                        type="checkbox">
                             </label>
                         </div>
 
                         <div class="radio" th:if="${Type} == 1">
                             <label>
-                                <input class="selections" th:id="${entries['num']}" name="optionsRadios" type="radio">
+                                <input class="selections" name="optionsRadios" th:id="${entries['num']}" type="radio">
                             </label>
                         </div>
                     </div>
@@ -89,9 +101,14 @@
     </div>
     <br>
     <!-- Submit button -->
-    <button id="submitButton" class="btn btn-default" th:onclick="|submitVote(${Type}, ${VoteID})|" type="button"><i
-            class="fa fa-hand-stop-o"></i> 确定提交
-    </button>
+    <div aria-label="..." class="btn-group" role="group">
+        <button class="btn btn-default" id="submitButton" th:onclick="|submitVote(${Type}, ${VoteID})|" type="button"><i
+                class="fa fa-hand-stop-o"></i> 确定提交
+        </button>
+        <button class="btn btn-default" data-target="#shareQR" data-toggle="modal" type="button"><i
+                class="fa fa-qrcode"></i> 分享二维码
+        </button>
+    </div>
     <!-- Alert window, controlled by JS -->
     <br>
     <div class="alert"></div>
@@ -107,7 +124,6 @@
 <span th:replace="/vote/modal/toIndex_cn"></span>
 <span th:replace="/vote/modal/toVoteID_cn"></span>
 
-<script src="/static/jquery/jquery-3.4.1.min.js"></script>
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 <script src="/static/bootstrap/js/icheck.min.js"></script>
 

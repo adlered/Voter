@@ -1,5 +1,5 @@
 # Voter
-:hand: Simple online vote system based in Spring Boot | 基于Spring Boot的简易投票系统 | Bootstrap | :cupid: Good looking
+:cn: Simple online vote system based on Spring Boot | 基于SpringBoot的简约投票系统 | :sunglasses: COOL & MODERN | ANONYMOUS | Bootstrap | :cupid: Good looking
 
 [中文说明](#中文说明)
 

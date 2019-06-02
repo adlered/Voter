@@ -16,7 +16,7 @@ function toVoteID() {
         success: function (data) {
             if (data == 1) {
                 //Exist
-                location.href = "/vote/" + voteID;
+                location.href = "/vote/en/" + voteID;
             } else if (data == 0) {
                 //Not exist
                 alert("VoteID not found! Please try again.")

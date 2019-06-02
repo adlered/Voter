@@ -37,6 +37,7 @@
 
 <div class="container">
     <div class="title">
+        <a class="pull-left" href="javascript: void(0);" onclick="switchLang()">-> 简体中文</a>
         <h2 th:text="${Title}"></h2>
         <h4 th:text="${Describe}"></h4>
         <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">Make a <b>multiple selection</b> : )</p>
@@ -103,6 +104,12 @@
 <script src="/static/js/vote/toVoteID_en.js"></script>
 <script>
     eventOnSelect([[${Limit}]]);
+</script>
+<script src="/static/js/vote/switchLanguage.js"></script>
+<script>
+    function switchLang() {
+        switchLanguage("cn", [[${VoteID}]]);
+    }
 </script>
 </body>
 </html>

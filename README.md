@@ -1,6 +1,8 @@
 # Voter
 :cn: Simple online vote system based on Spring Boot | 基于SpringBoot的简约投票系统 | :sunglasses: COOL & MODERN | ANONYMOUS | Bootstrap | :cupid: Good looking
 
+:construction_worker: 部署中遇到问题？:heavy_plus_sign: 我的微信号：1101635162 :ok_hand: 无偿帮助你解决问题。
+
 [中文说明](#中文说明)
 
 [English Version](#english-version)

@@ -1,9 +1,11 @@
 package pers.adlered.voter.mapper;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 import pers.adlered.voter.dao.Vote;
 
 @Mapper
+@Service
 public interface VoteMapper {
     @Select("SELECT * FROM Voter_Vote where VID = #{VID}")
     Vote getVote(@Param("VID") Integer VID);

@@ -1,7 +1,6 @@
 package pers.adlered.voter.controller;
 
 import com.google.common.util.concurrent.RateLimiter;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import pers.adlered.voter.analyzer.Selection;
 import pers.adlered.voter.analyzer.Serialize;
-import pers.adlered.voter.dao.Select;
 import pers.adlered.voter.dao.Vote;
 import pers.adlered.voter.limit.IpUtil;
 import pers.adlered.voter.limit.LoadingCacheServiceImpl;
@@ -20,7 +18,6 @@ import pers.adlered.voter.tool.GetDate;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -111,7 +108,7 @@ public class VoteController {
             if (ipAddr.equals("0:0:0:0:0:0:0:1")) {
                 localAccess = true;
             }
-            if(limiter.tryAcquire() || localAccess){
+            if (limiter.tryAcquire() || localAccess) {
                 //PASS
                 //Get VID info
                 Vote vote = voteMapper.getVote(VID);
@@ -119,9 +116,9 @@ public class VoteController {
                 //Package and readout
                 List<Map<String, String>> selects = Selection.analyze(selectionSerial);
                 //Split selection
-                String selectedList[] = selected.split(",");
+                String[] selectedList = selected.split(",");
                 //Convert to Integer
-                Integer selList[] = new Integer[selectedList.length];
+                Integer[] selList = new Integer[selectedList.length];
                 Integer i = 0;
                 for (String sel : selectedList) {
                     selList[i] = Integer.parseInt(sel);
@@ -153,7 +150,7 @@ public class VoteController {
                 //Update to database
                 voteMapper.vote(serial, VID);
                 return "1";
-            }else {
+            } else {
                 //DENIED
                 return "0";
             }

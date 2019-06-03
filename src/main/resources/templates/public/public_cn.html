@@ -22,18 +22,18 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
+            <button aria-controls="navbar" aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar"
+                    data-toggle="collapse" type="button">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand logo" style="cursor:pointer;" data-target="#mainPage" data-toggle="modal">Voter</a>
+            <a class="navbar-brand logo" data-target="#mainPage" data-toggle="modal" style="cursor:pointer;">Voter</a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">发起投票</a></li>
-                <li><a href="javascript: void(0);" data-target="#toVoteID" data-toggle="modal">前往 VoteID ..</a></li>
+                <li><a data-target="#toVoteID" data-toggle="modal" href="javascript: void(0);">前往 VoteID ..</a></li>
             </ul>
         </div>
     </div>
@@ -108,7 +108,9 @@
         <i class="fa fa-plus"></i>
     </button>
     <!-- Submit button -->
-    <p><div class="isError"></div></p>
+    <p>
+    <div class="isError"></div>
+    </p>
     <section>
         <button class="progress-button" data-horizontal data-perspective data-style="rotate-side-up"
                 onclick="submitVote()">确定提交

@@ -1,6 +1,5 @@
 package pers.adlered.voter.analyzer;
 
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.stereotype.Controller;
 import pers.adlered.voter.configuration.MySQL;
 
@@ -18,9 +17,9 @@ public class DatabaseCheck {
             Statement statement = null;
             ResultSet resultSet = null;
             try {
-            connection = DriverManager.getConnection(IP, MySQL.Username, MySQL.Password);
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery("SELECT * FROM Voter_Vote");
+                connection = DriverManager.getConnection(IP, MySQL.Username, MySQL.Password);
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery("SELECT * FROM Voter_Vote");
             } catch (SQLException SQLE) {
                 System.out.println("[TIP] Did you configured the MySQL properties on CLASS \"pers.adlered.voter.configuration.MySQL\" ? If you didn't create database and tables for Voter before, check the CLASS.");
             }

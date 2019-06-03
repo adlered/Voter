@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Selection {
-    public static List<Map<String,String>> analyze(String words) {
+    public static List<Map<String, String>> analyze(String words) {
         List<Map<String, String>> selectionList = new ArrayList<Map<String, String>>();
         words = words.replaceAll("\n", "");
-        String mark[] = words.split("<%");
+        String[] mark = words.split("<%");
 
         //If i start with 0, the space will be include because of split() method.
         float countVotes = 0;

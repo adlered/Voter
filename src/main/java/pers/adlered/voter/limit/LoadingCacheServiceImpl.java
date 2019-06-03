@@ -24,6 +24,7 @@ public class LoadingCacheServiceImpl {
                     return RateLimiter.create(0.00001); //? key per second 1/86400=0.00001=24H
                 }
             });
+
     public RateLimiter getRateLimiter(String key) throws ExecutionException {
         return ipRequestCaches.get(key);
     }

@@ -1,9 +1,6 @@
 package pers.adlered.voter.analyzer;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import pers.adlered.voter.dao.Vote;
-import pers.adlered.voter.mapper.VoteMapper;
 
 import java.util.List;
 import java.util.Map;

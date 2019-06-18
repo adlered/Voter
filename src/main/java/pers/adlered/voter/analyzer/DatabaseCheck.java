@@ -45,6 +45,8 @@ public class DatabaseCheck {
                     SQL = "INSERT INTO `Voter_Vote` VALUES (1, 'This is a vote title :)', 'And here is a describe of the vote XD', '<%1<%92<%Vote for Xiaoli<%2<%42<%Vote for Zhanghua<%3<%41<%Vote for Ergou<%4<%37<%Vote for Guawazi<%5<%48<%Vote for Benwei<%6<%50<%Vote for Adler', 0, 2);";
                     statement.executeUpdate(SQL);
                     System.out.println("[VOTER] It seems like successful to create default tables. You should check your Database and access the default vote on page \"/vote/1\"");
+                } catch (NullPointerException NPE2) {
+                    System.out.println("[VOTER] Create table failed! Please create a database named \"Voter\" first!");
                 } catch (Exception E) {
                     E.printStackTrace();
                 }

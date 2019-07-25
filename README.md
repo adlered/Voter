@@ -9,7 +9,7 @@
 
 # 预览 Preview
 
-[公开测试网站 | Public Test Website](http://tools.stackoverflow.wiki:7426/)
+[公开测试网站 | Public Test Website](https://voter.stackoverflow.wiki/)
 
 ![DEMO](/images/Demo-Full.gif)
 

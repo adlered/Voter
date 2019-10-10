@@ -42,7 +42,7 @@ CREATE TABLE `Voter_Vote` (
   `VID` int(11) NOT NULL AUTO_INCREMENT,
   `Title` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
   `Describe` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `Selection` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `Selection` varchar(10000) CHARACTER SET utf8mb4 DEFAULT NULL,
   `Type` int(11) DEFAULT '0',
   `Limit` int(11) DEFAULT '-1',
   PRIMARY KEY (`VID`)
@@ -104,16 +104,16 @@ Voter integrates the ability to automatically generate data tables. Editing the 
 USE Voter;
 
 CREATE TABLE `Voter_Vote` (
-  `VID` int(11) NOT NULL AUTO_INCREMENT,
-  `Title` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `Describe` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `Selection` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `Type` int(11) DEFAULT '0',
-  `Limit` int(11) DEFAULT '-1',
-  PRIMARY KEY (`VID`)
+  `VID` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `Describe` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `Selection` varchar(10000) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `Type` int(11) DEFAULT '0',
+  `Limit` int(11) DEFAULT '-1',
+  PRIMARY KEY (`VID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
-INSERT INTO `Voter_Vote` VALUES (1, 'This is a vote title :)', 'And here is a describe of the vote XD', '<%1<%92<%Vote for Xiaoli<%2<%42< %Vote for Zhanghua<%3<%41<%Vote for Ergou<%4<%37<%Vote for Guawazi<%5<%48<%Vote for Benwei<%6<%50<%Vote for Adler', 0, 2);
+INSERT INTO `Voter_Vote` VALUES (1, 'This is a vote title :)', 'And here is a describe of the vote XD', '<%1<%92<%Vote for Xiaoli<%2<%42<%Vote for Zhanghua<%3<%41<%Vote for Ergou<%4<%37<%Vote for Guawazi<%5<%48<%Vote for Benwei<%6<%50<%Vote for Adler', 0, 2);
 ```
 
 #### Configuring database connections

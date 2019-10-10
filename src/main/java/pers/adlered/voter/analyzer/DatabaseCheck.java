@@ -36,7 +36,7 @@ public class DatabaseCheck {
                             "  `VID` int(11) NOT NULL AUTO_INCREMENT,\n" +
                             "  `Title` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,\n" +
                             "  `Describe` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,\n" +
-                            "  `Selection` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,\n" +
+                            "  `Selection` varchar(10000) CHARACTER SET utf8mb4 DEFAULT NULL,\n" +
                             "  `Type` int(11) DEFAULT '0',\n" +
                             "  `Limit` int(11) DEFAULT '-1',\n" +
                             "  PRIMARY KEY (`VID`)\n" +

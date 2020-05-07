@@ -51,7 +51,7 @@
         <a class="pull-left" href="javascript: void(0);" onclick="switchLang()">简体中文</a>
         <br>
         <h2 th:text="${Title}"></h2>
-        <h4 th:text="${Describe}"></h4>
+        <h4 th:utext="${Describe}"></h4>
         <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">Make a <b>multiple selection</b> : )</p>
         <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 1">Make a <b>single election</b> : )</p>
         <p th:if="${Limit} != -1">

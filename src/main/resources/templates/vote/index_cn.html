@@ -51,7 +51,7 @@
         <a class="pull-left" href="javascript: void(0);" onclick="switchLang()">English</a>
         <br>
         <h2 th:text="${Title}"></h2>
-        <h4 th:text="${Describe}"></h4>
+        <span th:utext="${Describe}"></span>
         <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 0">请做 <b>多项选择</b> : )</p>
         <p class="text-danger" style="font-size: 16px;" th:if="${Type} == 1">请做 <b>单项选择</b> : )</p>
         <p th:if="${Limit} != -1">
